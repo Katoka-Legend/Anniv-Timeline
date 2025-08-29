@@ -33,22 +33,26 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:400 16px
   .tl-card{margin-left:40px;max-width:100%}
   .tl-media{grid-template-columns:1fr 1fr}
 }
-/* Show full tall primary image without cropping */
+/* Bigger, uncropped tall primary */
+.tl-media .primary.tall{
+  width:100%;
+}
 .tl-media .primary.tall img{
   width:100%;
   height:auto;
-  object-fit:contain;     /* see entire image */
+  object-fit:contain;
   display:block;
+  /* allow more height on large screens */
+  max-height:78vh;        /* fill most of the viewport */
+  margin-inline:auto;
 }
 
-/* When a tall primary exists, hide secondary images by default */
-.tl-media:has(.primary.tall):not(.open) figure:not(.primary){
-  display:none;
+/* Desktop: widen cards a bit so the image can breathe on the right/left */
+@media (min-width:900px){
+  .tl-card{ max-width:520px; }  /* was 420px */
 }
 
-/* Optional: soften max height on very tall images for small screens */
+/* Mobile comfort */
 @media (max-width:800px){
-  .tl-media .primary.tall img{
-    max-height:80vh;      /* fits on screen; scroll to see more below */
-  }
+  .tl-media .primary.tall img{ max-height:86vh; }
 }

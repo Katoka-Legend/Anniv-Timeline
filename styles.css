@@ -1,89 +1,137 @@
+/* ---------- Base ---------- */
 :root{
-  --bg:#0f0f12; --card:#17171c; --ink:#e9e9ee; --muted:#b7b7c6;
-  --accent:#ff6b6b; --line:#2a2a33; --radius:14px;
+  --bg:#0f0f12;
+  --card:#17171c;
+  --ink:#e9e9ee;
+  --muted:#b7b7c6;
+  --accent:#ff6b6b;
+  --line:#2a2a33;
+  --radius:16px;
+  --shadow:0 10px 24px rgba(0,0,0,.35);
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 system-ui,Segoe UI,Roboto,Helvetica,Arial}
-.site-header{max-width:900px;margin:24px auto 8px;padding:0 16px}
-.site-header h1{margin:0 0 8px;font:700 28px/1.2 system-ui}
-.quickjump a{color:var(--muted);margin-right:12px;text-decoration:none}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 system-ui,Segoe UI,Roboto,Helvetica,Arial}
+img{max-width:100%;display:block}
+
+/* ---------- Header & Footer ---------- */
+.site-header,.site-footer{max-width:1080px;margin:28px auto;padding:0 16px}
+.site-header h1{margin:0 0 8px;font:800 34px/1.15 system-ui}
+.quickjump a{color:var(--muted);margin-right:14px;text-decoration:none}
 .quickjump a:hover{color:var(--ink)}
-.timeline{position:relative;max-width:900px;margin:12px auto 64px;padding:0 16px}
-.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--line)}
-.tl-item{position:relative;display:flex;margin:28px 0}
+.site-footer{color:var(--muted);text-align:center}
+
+/* ---------- Timeline rail ---------- */
+.timeline{
+  position:relative;
+  max-width:1080px;
+  margin:8px auto 64px;
+  padding:0 16px;
+}
+.timeline::before{
+  content:'';
+  position:absolute;
+  left:50%;
+  transform:translateX(-1px);
+  top:0; bottom:0;
+  width:2px;
+  background:var(--line);
+}
+
+/* ---------- Items ---------- */
+.tl-item{
+  position:relative;
+  display:flex;
+  margin:34px 0;
+}
 .tl-item.left{justify-content:flex-start}
 .tl-item.right{justify-content:flex-end}
-.tl-item:nth-child(even){flex-direction:row-reverse}
-.tl-dot{position:absolute;left:calc(50% - 6px);top:24px;width:12px;height:12px;background:var(--accent);border-radius:50%;box-shadow:0 0 0 4px rgba(255,107,107,.2)}
-.tl-card{background:var(--card);border-radius:var(--radius);padding:16px 16px 12px;max-width:420px;width:100%;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+
+/* keep alternating even if classes not set manually */
+.tl-item:nth-of-type(even){flex-direction:row-reverse}
+.tl-item:nth-of-type(even) .tl-dot{left:calc(50% - 6px)}
+.tl-item:nth-of-type(odd) .tl-dot{left:calc(50% - 6px)}
+
+.tl-dot{
+  position:absolute;
+  top:22px;
+  width:12px;height:12px;
+  background:var(--accent);
+  border-radius:50%;
+  box-shadow:0 0 0 4px rgba(255,107,107,.22);
+}
+
+/* ---------- Card ---------- */
+.tl-card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:16px 16px 14px;
+  max-width:520px;
+  width:100%;
+  box-shadow:var(--shadow);
+}
 .tl-date{display:block;color:var(--muted);font-size:14px;margin-bottom:6px}
-.tl-title{margin:0 0 6px;font-size:20px}
-.tl-caption{margin:0 0 10px;color:var(--ink)}
-.tl-media{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.tl-media figure{margin:0;border-radius:12px;overflow:hidden;background:#111}
-.tl-media img{display:block;width:100%;height:100%;object-fit:cover}
-.tl-media:is(:not(.open)).is-collapsible figure:nth-child(n+3){display:none}
-.more{margin-top:8px;background:#23232b;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer}
+.tl-title{margin:0 0 8px;font-size:22px}
+.tl-caption{margin:0 0 12px}
+
+/* ---------- Media (default grid) ---------- */
+.tl-media{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.tl-media figure{
+  margin:0;
+  border-radius:14px;
+  overflow:hidden;
+  background:#0e0e12;
+  border:1px solid rgba(255,255,255,.06);
+}
+.tl-media img{
+  width:100%;height:100%;object-fit:cover;
+}
+
+/* Collapsible: hide after 2 by default when many */
+.tl-media.is-collapsible:not(.open) figure:nth-child(n+3){display:none}
+.more{
+  margin-top:10px;
+  background:#23232b;
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:10px 12px;
+  cursor:pointer;
+}
 .more:hover{border-color:var(--accent)}
-.site-footer{max-width:900px;margin:0 auto 40px;padding:0 16px;color:var(--muted);text-align:center}
-@media (max-width:800px){
-  .timeline::before{left:24px}
-  .tl-item,.tl-item:nth-child(even){flex-direction:row}
-  .tl-dot{left:18px}
-  .tl-card{margin-left:40px;max-width:100%}
-  .tl-media{grid-template-columns:1fr 1fr}
-}
-/* Bigger, uncropped tall primary */
-.tl-media .primary.tall{
-  width:100%;
-}
-.tl-media .primary.tall img{
-  width:100%;
-  height:auto;
-  object-fit:contain;
-  display:block;
-  /* allow more height on large screens */
-  max-height:78vh;        /* fill most of the viewport */
-  margin-inline:auto;
-}
 
-/* Desktop: widen cards a bit so the image can breathe on the right/left */
-@media (min-width:900px){
-  .tl-card{ max-width:520px; }  /* was 420px */
-}
-
-/* Mobile comfort */
-@media (max-width:800px){
-  .tl-media .primary.tall img{ max-height:86vh; }
-}
-/* FORCE right-side placement behavior remains unchanged by existing nth-child rules */
-#m02.tl-item.right { justify-content:flex-end; }
-
-/* Primary-tall behavior: show only the primary until expanded, and scale it big */
-.tl-media.tl-primary-tall{
-  display:block !important;           /* collapse grid to single column */
-}
-.tl-media.tl-primary-tall figure{
-  display:none !important;            /* hide all figures by default */
-}
-.tl-media.tl-primary-tall figure.primary{
-  display:block !important;           /* show only primary */
-}
+/* ---------- Tall primary mode (for long screenshots) ---------- */
+/* Add class 'tl-primary-tall' on the .tl-media wrapper */
+.tl-media.tl-primary-tall{display:block !important}
+.tl-media.tl-primary-tall figure{display:none !important}
+.tl-media.tl-primary-tall figure.primary{display:block !important}
 .tl-media.tl-primary-tall img{
   width:100%;
   height:auto !important;
-  max-height:82vh;                    /* big, uncropped */
   object-fit:contain !important;
-  display:block;
-  margin:8px 0 0 0;
+  max-height:82vh;
+  border-radius:14px;
 }
-
-/* When user clicks “Show more photos”, reveal the rest */
-.tl-media.tl-primary-tall.open figure{
-  display:block !important;
-}
+/* When expanded, restore grid for all photos */
 .tl-media.tl-primary-tall.open{
-  display:grid !important;            /* restore grid for the full gallery */
+  display:grid !important;
   grid-template-columns:1fr 1fr;
-  gap:8px;
+  gap:10px;
+}
+.tl-media.tl-primary-tall.open figure{display:block !important}
+
+/* ---------- Responsive rail alignment ---------- */
+@media (max-width:900px){
+  .timeline::before{left:28px;transform:none}
+  .tl-item,.tl-item:nth-of-type(even){flex-direction:row}
+  .tl-dot{left:22px}
+  .tl-card{margin-left:48px;max-width:100%}
+  .tl-media{grid-template-columns:1fr 1fr}
+}
+/* Larger desktops: allow roomier cards if desired */
+@media (min-width:1280px){
+  .tl-card{max-width:560px}
 }

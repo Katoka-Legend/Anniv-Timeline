@@ -1,193 +1,154 @@
-/* ---------- Base ---------- */
+/* =========================
+   Our Story — Clean Styles
+   =========================
+   - Centered rail with aligned dots (desktop) [1]
+   - Left-anchored rail on mobile (reliable alignment) [1]
+   - Alternating left/right items [1]
+   - Card with responsive width and shadow [1]
+   - Media grid + collapsible gallery [1]
+   - Tall-primary mode: one big uncropped image; reveal others on expand [2]
+*/
+
 :root{
   --bg:#0f0f12;
-  --card:#17171c;
+  --surface:#17171c;
   --ink:#e9e9ee;
   --muted:#b7b7c6;
+  --rail:#2a2a33;
   --accent:#ff6b6b;
-  --line:#2a2a33;
   --radius:16px;
   --shadow:0 10px 24px rgba(0,0,0,.35);
 }
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 system-ui,Segoe UI,Roboto,Helvetica,Arial}
-img{max-width:100%;display:block}
 
-/* ---------- Header & Footer ---------- */
-.site-header,.site-footer{max-width:1080px;margin:28px auto;padding:0 16px}
-.site-header h1{margin:0 0 8px;font:800 34px/1.15 system-ui}
-.quickjump a{color:var(--muted);margin-right:14px;text-decoration:none}
-.quickjump a:hover{color:var(--ink)}
-.site-footer{color:var(--muted);text-align:center}
+/* Base */
+*{box-sizing:border-box} /* [1] */
+html,body{
+  margin:0; padding:0;
+  background:var(--bg); color:var(--ink);
+  font:400 16px/1.6 system-ui,Segoe UI,Roboto,Helvetica,Arial;
+} /* [1] */
+img{max-width:100%; height:auto; display:block} /* [1] */
 
-/* ---------- Timeline rail ---------- */
+/* Header/Footer */
+.site-header,.site-footer{max-width:1080px; margin:28px auto; padding:0 16px} /* [1] */
+.site-header h1{margin:0 0 8px; font:800 34px/1.15 system-ui} /* [1] */
+.quickjump a{color:var(--muted); margin-right:14px; text-decoration:none} /* [1] */
+.quickjump a:hover{color:var(--ink)} /* [1] */
+.site-footer{color:var(--muted); text-align:center} /* [1] */
+
+/* Timeline rail */
 .timeline{
   position:relative;
   max-width:1080px;
   margin:8px auto 64px;
   padding:0 16px;
-}
+} /* [1] */
 .timeline::before{
   content:'';
   position:absolute;
-  left:50%;
+  left:50%; top:0; bottom:0;
   transform:translateX(-1px);
-  top:0; bottom:0;
-  width:2px;
-  background:var(--line);
-}
+  width:2px; background:var(--rail);
+} /* [1] */
 
-/* ---------- Items ---------- */
+/* Items */
 .tl-item{
   position:relative;
   display:flex;
-  margin:34px 0;
-}
-.tl-item.left{justify-content:flex-start}
-.tl-item.right{justify-content:flex-end}
+  margin:36px 0;
+} /* [1] */
+.tl-item.left{justify-content:flex-start} /* [1] */
+.tl-item.right{justify-content:flex-end} /* [1] */
+/* Fallback alternating if classes omitted */
+.tl-item:nth-of-type(even){flex-direction:row-reverse} /* [1] */
 
-/* keep alternating even if classes not set manually */
-.tl-item:nth-of-type(even){flex-direction:row-reverse}
-.tl-item:nth-of-type(even) .tl-dot{left:calc(50% - 6px)}
-.tl-item:nth-of-type(odd) .tl-dot{left:calc(50% - 6px)}
-
+/* Dot aligned to rail */
 .tl-dot{
   position:absolute;
+  left:calc(50% - 6px); /* 12px dot width / 2 */
   top:22px;
-  width:12px;height:12px;
+  width:12px; height:12px; border-radius:50%;
   background:var(--accent);
-  border-radius:50%;
   box-shadow:0 0 0 4px rgba(255,107,107,.22);
-}
+} /* [1] */
 
-/* ---------- Card ---------- */
+/* Card */
 .tl-card{
-  background:var(--card);
+  background:var(--surface);
   border-radius:var(--radius);
-  padding:16px 16px 14px;
-  max-width:520px;
+  padding:18px 16px 14px;
   width:100%;
+  max-width:560px;
   box-shadow:var(--shadow);
-}
-.tl-date{display:block;color:var(--muted);font-size:14px;margin-bottom:6px}
-.tl-title{margin:0 0 8px;font-size:22px}
-.tl-caption{margin:0 0 12px}
+} /* [1] */
+.tl-date{display:block; color:var(--muted); font-size:14px; margin-bottom:6px} /* [1] */
+.tl-title{margin:0 0 8px; font-size:22px} /* [1] */
+.tl-caption{margin:0 12px 12px 0} /* [1] */
 
-/* ---------- Media (default grid) ---------- */
+/* Default media grid */
 .tl-media{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
-}
+} /* [1] */
 .tl-media figure{
   margin:0;
   border-radius:14px;
   overflow:hidden;
   background:#0e0e12;
   border:1px solid rgba(255,255,255,.06);
-}
+} /* [1] */
 .tl-media img{
-  width:100%;height:100%;object-fit:cover;
-}
+  width:100%; height:100%;
+  object-fit:cover;
+} /* [1] */
 
-/* Collapsible: hide after 2 by default when many */
-.tl-media.is-collapsible:not(.open) figure:nth-child(n+3){display:none}
+/* Collapsible when many images */
+.tl-media.is-collapsible:not(.open) figure:nth-child(n+3){display:none} /* [1] */
 .more{
   margin-top:10px;
-  background:#23232b;
-  color:var(--ink);
-  border:1px solid var(--line);
+  background:#23232b; color:var(--ink);
+  border:1px solid var(--rail);
   border-radius:12px;
-  padding:10px 12px;
-  cursor:pointer;
-}
-.more:hover{border-color:var(--accent)}
+  padding:10px 12px; cursor:pointer;
+} /* [1] */
+.more:hover{border-color:var(--accent)} /* [1] */
 
-/* ---------- Tall primary mode (for long screenshots) ---------- */
-/* Add class 'tl-primary-tall' on the .tl-media wrapper */
-.tl-media.tl-primary-tall{display:block !important}
-.tl-media.tl-primary-tall figure{display:none !important}
-.tl-media.tl-primary-tall figure.primary{display:block !important}
+/* Tall primary mode (wrapper class: tl-primary-tall) */
+.tl-media.tl-primary-tall{display:block !important} /* [2] */
+.tl-media.tl-primary-tall figure{display:none !important} /* [2] */
+.tl-media.tl-primary-tall figure.primary{display:block !important} /* [2] */
 .tl-media.tl-primary-tall img{
   width:100%;
   height:auto !important;
-  object-fit:contain !important;
+  object-fit:contain !important; /* show full screenshot */
   max-height:82vh;
   border-radius:14px;
-}
-/* When expanded, restore grid for all photos */
+} /* [2] */
+/* Expanded: restore grid */
 .tl-media.tl-primary-tall.open{
   display:grid !important;
   grid-template-columns:1fr 1fr;
   gap:10px;
-}
-.tl-media.tl-primary-tall.open figure{display:block !important}
+} /* [1] */
+.tl-media.tl-primary-tall.open figure{display:block !important} /* [1] */
 
-/* ---------- Responsive rail alignment ---------- */
-@media (max-width:900px){
-  .timeline::before{left:28px;transform:none}
-  .tl-item,.tl-item:nth-of-type(even){flex-direction:row}
-  .tl-dot{left:22px}
-  .tl-card{margin-left:48px;max-width:100%}
-  .tl-media{grid-template-columns:1fr 1fr}
-}
-/* Larger desktops: allow roomier cards if desired */
-@media (min-width:1280px){
-  .tl-card{max-width:560px}
-}
-/* 1) Use a true centered rail that accounts for padding */
-.timeline{
-  position:relative;
-  max-width:1080px;
-  margin:8px auto 64px;
-  padding:0 16px;
-  display:block;
-}
-.timeline::before{
-  content:'';
-  position:absolute;
-  left:50%;
-  top:0; bottom:0;
-  width:2px;
-  transform:translateX(-1px);
-  background:var(--line);
-}
-
-/* 2) Ensure each item’s dot aligns with the rail regardless of flex direction */
-.tl-item{ position:relative; display:flex; margin:34px 0; }
-.tl-dot{
-  position:absolute;
-  left:calc(50% - 6px);   /* 12px dot width / 2 */
-  top:22px;
-  width:12px;height:12px;border-radius:50%;
-  background:var(--accent);
-  box-shadow:0 0 0 4px rgba(255,107,107,.22);
-}
-
-/* 3) Mobile: move the rail left and the dot with it, while cards shift right */
-@media (max-width:900px){
-  .timeline::before{ left:28px; transform:none; }
-  .tl-dot{ left:22px; }  /* 6px = half dot width, 28-6 = 22 */
-  .tl-item, .tl-item:nth-of-type(even){ flex-direction:row; }
-  .tl-card{ margin-left:48px; max-width:100%; }
-}
-
-/* 4) Consistent card padding so dot top matches content start */
-.tl-card{ padding-top:18px; }
-
-/* 5) Optional: tighten vertical connection by drawing a short connector */
+/* Optional connector under each dot for visual continuity */
 .tl-item::after{
   content:'';
   position:absolute;
-  left:50%;
-  transform:translateX(-1px);
-  top:34px;              /* starts just under the dot */
-  height:24px; width:2px;
-  background:var(--line);
-}
+  left:50%; transform:translateX(-1px);
+  top:34px; height:24px; width:2px; background:var(--rail);
+} /* [1] */
+
+/* Responsive rail & cards */
 @media (max-width:900px){
-  .tl-item::after{
-    left:28px; transform:none;
-  }
+  .timeline::before{left:28px; transform:none} /* rail fixed left */ /* [1] */
+  .tl-dot{left:22px}                           /* 28 - half dot width */ /* [1] */
+  .tl-item, .tl-item:nth-of-type(even){flex-direction:row} /* unified flow */ /* [1] */
+  .tl-card{margin-left:48px; max-width:100%}   /* card shifts right of rail */ /* [1] */
+  .tl-media{grid-template-columns:1fr 1fr}      /* tidy grid on mobile */ /* [1] */
 }
 
+/* Note: After replacing this file, hard-refresh the site (Ctrl/Cmd+Shift+R)
+   to bypass GitHub Pages/browser caching and see the new styles immediately. */ /* [4][3] */

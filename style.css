@@ -1,0 +1,35 @@
+:root{
+  --bg:#0f0f12; --card:#17171c; --ink:#e9e9ee; --muted:#b7b7c6;
+  --accent:#ff6b6b; --line:#2a2a33; --radius:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 system-ui,Segoe UI,Roboto,Helvetica,Arial}
+.site-header{max-width:900px;margin:24px auto 8px;padding:0 16px}
+.site-header h1{margin:0 0 8px;font:700 28px/1.2 system-ui}
+.quickjump a{color:var(--muted);margin-right:12px;text-decoration:none}
+.quickjump a:hover{color:var(--ink)}
+.timeline{position:relative;max-width:900px;margin:12px auto 64px;padding:0 16px}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--line)}
+.tl-item{position:relative;display:flex;margin:28px 0}
+.tl-item.left{justify-content:flex-start}
+.tl-item.right{justify-content:flex-end}
+.tl-item:nth-child(even){flex-direction:row-reverse}
+.tl-dot{position:absolute;left:calc(50% - 6px);top:24px;width:12px;height:12px;background:var(--accent);border-radius:50%;box-shadow:0 0 0 4px rgba(255,107,107,.2)}
+.tl-card{background:var(--card);border-radius:var(--radius);padding:16px 16px 12px;max-width:420px;width:100%;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.tl-date{display:block;color:var(--muted);font-size:14px;margin-bottom:6px}
+.tl-title{margin:0 0 6px;font-size:20px}
+.tl-caption{margin:0 0 10px;color:var(--ink)}
+.tl-media{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tl-media figure{margin:0;border-radius:12px;overflow:hidden;background:#111}
+.tl-media img{display:block;width:100%;height:100%;object-fit:cover}
+.tl-media:is(:not(.open)).is-collapsible figure:nth-child(n+3){display:none}
+.more{margin-top:8px;background:#23232b;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer}
+.more:hover{border-color:var(--accent)}
+.site-footer{max-width:900px;margin:0 auto 40px;padding:0 16px;color:var(--muted);text-align:center}
+@media (max-width:800px){
+  .timeline::before{left:24px}
+  .tl-item,.tl-item:nth-child(even){flex-direction:row}
+  .tl-dot{left:18px}
+  .tl-card{margin-left:40px;max-width:100%}
+  .tl-media{grid-template-columns:1fr 1fr}
+}

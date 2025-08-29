@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Our Timeline</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Our Story</h1>
+    <nav class="quickjump">
+      <a href="#year1">Year 1</a>
+      <a href="#trips">Trips</a>
+      <a href="#laughs">Laughs</a>
+      <a href="#finale">Finale</a>
+    </nav>
+  </header>
+
+  <main class="timeline" id="top">
+    <!-- Memory blocks get appended here -->
+    <article class="tl-item left" id="m01">
+    <div class="tl-dot" aria-hidden="true"></div>
+    <div class="tl-card">
+        <time class="tl-date">Children’s Day • Street 1522</time>
+        <h2 class="tl-title">Being Friends</h2>
+        <p class="tl-caption">Back in 11th, just friends doing silly things—and somehow it became our favorite kind of fun.</p>
+
+        <!-- Primary photo first -->
+        <div class="tl-media">
+        <figure class="primary">
+            <img src="media/NOV-14-2022-Childrens-Day-1.jpg"
+                alt="Shoulder-ride laughter on Children’s Day"
+                loading="lazy" />
+        </figure>
+
+        <!-- Additional photos -->
+        <figure>
+            <img src="media/NOV-14-2022-Childrens-Day.jpg"
+                alt="Carrying moment on Children’s Day"
+                loading="lazy" />
+        </figure>
+        <figure>
+            <img src="media/20-NOV-2022-Street-22-meetup.jpg"
+                alt="Friends moment at Street 1522"
+                loading="lazy" />
+        </figure>
+        <figure>
+            <img src="media/20-NOV-2022-Street-22-meetup-1.jpg"
+                alt="Candid at Street 1522"
+                loading="lazy" />
+        </figure>
+        <figure>
+            <img src="media/20-NOV-2022-Street-22-meetup-2.jpg"
+                alt="Another candid from Street 1522"
+                loading="lazy" />
+        </figure>
+        </div>
+        <!-- Optional Easter egg button for a hidden note or audio -->
+        <!-- <button class="egg" data-egg="m01">💌</button> -->
+    </div>
+    </article>
+
+    <!-- EXAMPLE ITEM (will be replaced with your Memory 01) -->
+    <article class="tl-item left" id="m00">
+      <div class="tl-dot" aria-hidden="true"></div>
+      <div class="tl-card">
+        <time class="tl-date">YYYY-MM • Place</time>
+        <h2 class="tl-title">Title goes here</h2>
+        <p class="tl-caption">Short 1–2 line caption.</p>
+        <div class="tl-media">
+          <!-- one or multiple images allowed -->
+          <figure><img src="media/sample-01.jpg" alt=" " /></figure>
+          <!-- <figure><img src="media/sample-02.jpg" alt=" " /></figure> -->
+        </div>
+        <!-- Optional Easter egg -->
+        <!-- <button class="egg" data-egg="m00">💌</button> -->
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer" id="finale">
+    <p>Made for our 2-year anniversary.</p>
+  </footer>
+
+  <script>
+    // Simple accordion for multi-photo groups on mobile
+    document.querySelectorAll('.tl-card').forEach(card => {
+      const media = card.querySelector('.tl-media');
+      if (!media) return;
+      const figs = media.querySelectorAll('figure');
+      if (figs.length > 2) {
+        media.classList.add('is-collapsible');
+        const btn = document.createElement('button');
+        btn.className = 'more';
+        btn.textContent = 'Show more photos';
+        btn.addEventListener('click', () => {
+          media.classList.toggle('open');
+          btn.textContent = media.classList.contains('open') ? 'Show fewer photos' : 'Show more photos';
+        });
+        card.appendChild(btn);
+      }
+    });
+  </script>
+</body>
+</html>

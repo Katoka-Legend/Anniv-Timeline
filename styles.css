@@ -56,3 +56,34 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:400 16px
 @media (max-width:800px){
   .tl-media .primary.tall img{ max-height:86vh; }
 }
+/* FORCE right-side placement behavior remains unchanged by existing nth-child rules */
+#m02.tl-item.right { justify-content:flex-end; }
+
+/* Primary-tall behavior: show only the primary until expanded, and scale it big */
+.tl-media.tl-primary-tall{
+  display:block !important;           /* collapse grid to single column */
+}
+.tl-media.tl-primary-tall figure{
+  display:none !important;            /* hide all figures by default */
+}
+.tl-media.tl-primary-tall figure.primary{
+  display:block !important;           /* show only primary */
+}
+.tl-media.tl-primary-tall img{
+  width:100%;
+  height:auto !important;
+  max-height:82vh;                    /* big, uncropped */
+  object-fit:contain !important;
+  display:block;
+  margin:8px 0 0 0;
+}
+
+/* When user clicks “Show more photos”, reveal the rest */
+.tl-media.tl-primary-tall.open figure{
+  display:block !important;
+}
+.tl-media.tl-primary-tall.open{
+  display:grid !important;            /* restore grid for the full gallery */
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
